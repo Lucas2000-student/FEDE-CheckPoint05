@@ -8,7 +8,7 @@ interface Produto {
     id: number,
     title: string,
     price: number,
-    images: string
+    images: string[]
 }
 
 export default function CardProduto() {
@@ -25,16 +25,29 @@ export default function CardProduto() {
                 }))
                 setProdutos(todos)
             })
-            .catch(function () { console.error("Erro ao buscar API") })
+            .catch(() => console.error("Erro ao buscar API"))
     }, [])
+
     return (
-        <ul>
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4 bg-green-100">
             {produtos.map(prod => (
                 <li key={prod.id}>
-                    <div className="">
-                        <img src={prod.images} alt={prod.title} width={200} />
-                        <strong>Nome: </strong><Link href={`/produtos/${prod.id}`}>{prod.title}</Link>
-                        <p><strong>Preço: </strong>R$:{prod.price}</p>
+                    <div className="flex items-center border border-black p-4 rounded bg-white shadow-md">
+                        <img
+                            src={Array.isArray(prod.images) ? prod.images[0] : prod.images}
+                            alt={prod.title}
+                            className="w-32 h-32 object-cover mr-4"
+                        />
+                        <div>
+                            <strong className="text-green-800">Nome: </strong>
+                            <Link href={`/produtos/${prod.id}`} className="text-green-600 hover:underline">
+                                {prod.title}
+                            </Link>
+                            <p>
+                                <strong className="text-green-800">Preço: </strong>
+                                R$ {prod.price}
+                            </p>
+                        </div>
                     </div>
                 </li>
             ))}
