@@ -1,5 +1,3 @@
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
 import type { Metadata } from "next";
 import "./globals.css";
 
@@ -16,9 +14,12 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body>
-        <Header />
+        <div className="bg-green-800 text-white shadow-md py-6 px-4">
+          <h1 className="text-2xl md:text-3xl font-bold text-center">
+            Catálogo de Produtos!
+          </h1>
+        </div>
         {children}
-        <Footer />
       </body>
     </html>
   );
